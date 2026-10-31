@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 import joblib
@@ -25,16 +26,18 @@ st.write("Upload the test_data.csv file and evaluate different Machine Learning 
 # ----------------------------
 # Load Models
 # ----------------------------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_DIR = os.path.join(BASE_DIR, "models")
+
 models = {
-    "Logistic Regression": joblib.load("models/logistic_regression.pkl"),
-    "Decision Tree": joblib.load("models/decision_tree.pkl"),
-    "KNN": joblib.load("models/knn.pkl"),
-    "Naive Bayes": joblib.load("models/naive_bayes.pkl"),
-    "Support Vector Machine": joblib.load("models/support_vector_machine.pkl")
+    "Logistic Regression": joblib.load(os.path.join(MODEL_DIR, "logistic_regression.pkl")),
+    "Decision Tree": joblib.load(os.path.join(MODEL_DIR, "decision_tree.pkl")),
+    "KNN": joblib.load(os.path.join(MODEL_DIR, "knn.pkl")),
+    "Naive Bayes": joblib.load(os.path.join(MODEL_DIR, "naive_bayes.pkl")),
+    "Support Vector Machine": joblib.load(os.path.join(MODEL_DIR, "support_vector_machine.pkl"))
 }
 
-# Load scaler
-scaler = joblib.load("models/scaler.pkl")
+scaler = joblib.load(os.path.join(MODEL_DIR, "scaler.pkl"))
 
 # Models that require scaled data
 scaled_models = [
